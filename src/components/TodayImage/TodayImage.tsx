@@ -1,12 +1,21 @@
 import React, { FC } from "react";
 import { View, Text, StyleSheet, Image, Button } from "react-native";
-import { NasaApiRespons } from "../../types/index";
+import { NasaApiResponse, RootStackParams } from "../../types/index";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-const TodayImage: FC<NasaApiRespons> = ({
-  date,
-  title,
-  url,
-}) => {
+type PostImageNavigationProps = NativeStackNavigationProp<
+  RootStackParams,
+  "Detail"
+>;
+
+const TodayImage: FC<NasaApiResponse> = ({ date, title, url, explanation }) => {
+  const { navigate } = useNavigation<PostImageNavigationProps>();
+
+  const hanldeViewDetail = () => {
+    navigate("Detail", { title, date, url, explanation });
+  };
+
   return (
     <View style={styles.container}>
       <View>
@@ -15,7 +24,12 @@ const TodayImage: FC<NasaApiRespons> = ({
       <Text style={styles.title}>{title}</Text>
       <View style={styles.buttonC}>
         <Text style={styles.date}>{date}</Text>
-        <Button title="View" />
+        <Button
+          title="View"
+          onPress={() => {
+            hanldeViewDetail();
+          }}
+        />
       </View>
     </View>
   );
@@ -47,9 +61,9 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 15,
   },
-  buttonC:{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent: 'space-between',
-  }
+  buttonC: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
 });

@@ -3,18 +3,17 @@ import { NasaApiResponse } from "../../types";
 import { Text, StyleSheet, View, ScrollView } from "react-native";
 import PostImage from "../PostImage/PostImage";
 
+
 const Last5DaysImage: FC<{ last5Days: NasaApiResponse[] }> = ({
   last5Days,
 }) => {
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Last 5 days</Text>
       <ScrollView style={styles.content}>
         {last5Days.map((item, index) => (
-          <PostImage key={index} {...item}>
-
-          </PostImage>
-
+          <PostImage key={index} {...item} />
         ))}
       </ScrollView>
     </View>

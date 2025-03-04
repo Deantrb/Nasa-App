@@ -7,3 +7,8 @@ export type NasaApiResponse ={
     title?:string ;
     url?:string;
 }
+
+export type RootStackParams={
+    Home:undefined;
+    Detail:NasaApiResponse;
+}
